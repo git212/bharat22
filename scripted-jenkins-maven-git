@@ -1,0 +1,16 @@
+node{
+    // function return home location of the tool
+    def mvnHome = tool name: 'maven3', type: 'maven'
+    
+    stage('Scm Checkout'){
+       git credentialsId: 'github',
+        url: 'https://github.com/git212/bharat22.git'
+        branch: 'master'
+    }
+    
+    stage('maven Build'){
+        sh  script: "${mvnHome}/bin/mvn clean package"
+        
+    }
+    
+}
