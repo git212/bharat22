@@ -5,29 +5,30 @@ pipeline{
         }
     stages{
         stage('SCM Checkout'){
-        steps{
-            git url: 'https://github.com/git212/bharat22.git',
-            branch: 'master',
-            credentialsId: 'github'
+            steps{
+                git url: 'https://github.com/git212/bharat22.git',
+                branch: 'master',
+                credentialsId: 'github'
 
+            }
         }
-    }
 
-    stage('Maven Build'){
-        steps{
-            sh 'Mvn clean package'
+        stage('Maven Build'){
+            steps{
+                sh 'Mvn clean package'
+            }
         }
-    }
 
-    stage('Deploy Dev'){
-        steps{
-            sshagent(['tomcat-dev']) {
-                // stop tomcat
-                sh "ssh -o StrictHostKeyChecking=no ec2-user  @13.233.168.87 /opt tomcat8/bin/shutdown.sh"
-                // copy war file to remote tomcat
-                sh "scp target/bharat22.war ec2-user 13.233.168.87:/opt/tomcat8/webapps/"
-                // start tomcat
-                sh "ssh ec2-user@13.233.168.87 /opt/tomcat8/bin/startup.sh"
+        stage('Deploy Dev'){
+            steps{
+                sshagent(['tomcat-dev']) {
+                    // stop tomcat
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user  @13.233.168.87 /opt tomcat8/bin/shutdown.sh"
+                    // copy war file to remote tomcat
+                    sh "scp target/bharat22.war ec2-user 13.233.168.87:/opt/tomcat8/webapps/"
+                    // start tomcat
+                    sh "ssh ec2-user@13.233.168.87 /opt/tomcat8/bin/startup.sh"
+                }
             }
         }    
     }
