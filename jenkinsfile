@@ -24,7 +24,7 @@ pipeline{
                 // copy war file to remote remote tomcat
                 sh "scp target/bharat22.war ec2-user 13.233.168.87:/opt/tomcat8/webapps/"
                 // start tomcat
-                sh "ssh ec2-user@13.233.168.87 /opt/tomcat8/bin/startup,sh"
+                sh "ssh ec2-user@13.233.168.87 /opt/tomcat8/bin/startup.sh"
             }
         }    
     }
