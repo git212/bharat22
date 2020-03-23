@@ -3,7 +3,7 @@ pipeline{
     environment{
     PATH = "${PATH}:${tool name: 'maven3', type: 'maven'}/bin"
     stages{
-        stage ('SCM Checkout')
+        stage ('SCM Checkout'){
         steps{
             git url: 'https://github.com/git212/bharat22.git',
             branch: 'master',
