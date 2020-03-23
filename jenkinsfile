@@ -1,21 +1,20 @@
 pipeline{
     agent any
     environment{
-          PATH = "${PATH}:${tool name: 'maven3', type: 'maven'}/bin"
-        }
+	  PATH = "${PATH}:${tool name: 'maven3', type: 'maven'}/bin"
+	}
     stages{
         stage('SCM Checkout'){
             steps{
-                git url: 'https://github.com/git212/bharat22.git',
+                git url: 'https://github.com/javahometech/6pmwebapp',
                 branch: 'master',
                 credentialsId: 'github'
-
             }
         }
 
         stage('Maven Build'){
             steps{
-                sh 'Mvn clean package'
+                sh 'mvn clean package'
             }
         }
 
@@ -23,13 +22,13 @@ pipeline{
             steps{
                 sshagent(['tomcat-dev']) {
                     // stop tomcat
-                    sh "ssh -o StrictHostKeyChecking=no ec2-user  @13.233.168.87 /opt tomcat8/bin/shutdown.sh"
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@13.233.168.87 /opt/tomcat8/bin/shutdown.sh"
                     // copy war file to remote tomcat
-                    sh "scp target/bharat22.war ec2-user 13.233.168.87:/opt/tomcat8/webapps/"
+                    sh "scp target/6pmwebapp.war  ec2-user@13.233.168.87:/opt/tomcat8/webapps/"
                     // start tomcat
-                    sh "ssh ec2-user@13.233.168.87 /opt/tomcat8/bin/startup.sh"
-                }
+                    sh "ssh ec2-user@13.233.231.8 /opt/tomcat8/bin/startup.sh"
+                } 
             }
-        }    
+        }
     }
 }
