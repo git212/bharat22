@@ -11,12 +11,14 @@ pipeline{
 
         }
     }
-    stage ('Maven Build')
+    
+    stage ('Maven Build'){
         steps{
             sh 'Mvn clean package'
         }
     }
-    stage ('Deploy Dev')
+
+    stage ('Deploy Dev'){
         steps{
             sshagent(['tomcat-dev']) {
                 // stop tomcat
