@@ -4,7 +4,7 @@ pipeline{
           PATH = "${PATH}:${tool name: 'maven3', type: 'maven'}/bin"
         }
     stages{
-        stage ('SCM Checkout'){
+        stage('SCM Checkout'){
         steps{
             git url: 'https://github.com/git212/bharat22.git',
             branch: 'master',
@@ -13,13 +13,13 @@ pipeline{
         }
     }
 
-    stage ('Maven Build'){
+    stage('Maven Build'){
         steps{
             sh 'Mvn clean package'
         }
     }
 
-    stage ('Deploy Dev'){
+    stage('Deploy Dev'){
         steps{
             sshagent(['tomcat-dev']) {
                 // stop tomcat
