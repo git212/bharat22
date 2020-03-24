@@ -24,7 +24,7 @@ pipeline{
                     // stop tomcat
                     sh "ssh -o StrictHostKeyChecking=no ec2-user@http:172.31.36.233 /opt/tomcat8/bin/shutdown.sh"
                     // copy war file to remote tomcat
-                    sh "scp target/6pmwebapp.war  ec2-user@http:172.31.36.233:/opt/tomcat8/webapps/"
+                    sh "scp target/bharat22.war ec2-user@http:172.31.36.233:/opt/tomcat8/webapps/"
                     // start tomcat
                     sh "ssh ec2-user@http:172.31.36.233 /opt/tomcat8/bin/startup.sh"
                 } 
