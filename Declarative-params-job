@@ -9,9 +9,9 @@ pipeline{
 			steps{
 				git branch: "${param['branch Name']}", 
 				url: 'https://github.com/git212/bharat22.git', 
-
 			}
 		}
 	}
 }
+
 
