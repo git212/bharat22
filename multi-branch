@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    environment{
+        PATH = "${PATH}:${tool name: 'maven3', type: 'maven}/bin
+    }
+    stages('Maven Build'){
+        stage('Maven Build'){
+            steps{
+                sh "Mvn clean package"
+            }
+        }
+        stage('Deploy -Dev')
+            steps{
+                echo "deploy to dev server"
+            }
+        }
+    }
+}
