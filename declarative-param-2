@@ -6,7 +6,7 @@ pipeline{
 	stages{
 		stage('SCM Checkout'){
 			steps{
-				git branch: "${param['branchName']}", 
+				git branch: "${params['branch name']}", 
 				    url: 'https://github.com/git212/bharat22.git' 
 			}
 		}
