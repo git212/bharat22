@@ -1,17 +1,14 @@
 pipeline{
-	agent any
+    agent any
     parameters {
-         string defaultValue: 'master', description: 'choose the branch to build and deploy', name: 'branch name', trim: false
+        string defaultValue: 'master', description: 'choose the branch to build and deploy', name: 'branch name', trim: false
     }
-	
-	stages{
-		stage('SCM Checkout'){
-			steps{
-				git branch: "${param['branch Name']}", 
-				url: 'https://github.com/git212/bharat22.git', 
-			}
-		}
-	}
+    stages{
+	stage('SCM Checkout'){
+	    steps{
+		git branch: "${param['branchName']}", 
+		    url: 'https://github.com/git212/bharat22.git',
+	    }
+        }
+    }
 }
-
-
