@@ -1,3 +1,3 @@
-FROM tomcat:8.0.20-jre8
-# Dummy text to test 
-COPY target/*.war /usr/local/tomcat/myapps/myapp.war
+FROM tomcat:8
+# Take the war and copy to webapps of tomcat
+COPY target/*.war /usr/local/tomcat/webapps/myapp.war
