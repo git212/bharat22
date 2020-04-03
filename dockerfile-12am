@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Nexus Push'){
             steps{
-                withCredentials([string(credentialsId: 'docker-hub', variable: dockerHubpwd')]) {
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubpwd')]) {
                      sh "dockeshr login -u bharat -p ${dockerHubpwd}"
                      sh "dockeshr login -u bharat/nodeapp:${DOCKER_TAG}"
                     
