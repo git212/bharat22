@@ -4,17 +4,16 @@ pipeline {
         DOCKER_TAG = getDockerTag()
     }
     stages{
-        stage('Build Docker Image') {
+        stage('Build Docker Image'){
             steps{
-                sh "docker build . -t bharat/nodeapp:${DOCKER_TAG} "
+                sh "docker build . -t bharat/nodeapp:${DOCKER_TAG}"
             }
         }
-        stage('DockerHub push') {
+        stage('DockerHub push'){
             steps{
-                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubpwd')]) {
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubpwd')]){
                      sh "dockeshr login -u bharat -p ${dockerHubpwd}"
                      sh "dockeshr login -u bharat/nodeapp:${DOCKER_TAG}"
-                    
                 }
             }
         }
