@@ -1,26 +1,25 @@
-pipeline{
+pipeline {
     agent any
     environment{
         DOCKER_TAG = getDockerTag()
     }
     stages{
-        stage('Build Docker Image') {
+        stage('Build Docker Image'){
             steps{
                 sh "docker build . -t mitanjali/nodeapp:${DOCKER_TAG} "
             }
         }
-        stage('DockerHub push') {
+        stage('DockerHub push'){
             steps{
-                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubpwd')]) {
-                     sh "docker login -u mitanjali -p ${dockerHubpwd}"
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
+                     sh "docker login -u mitanjali -p ${dockerHubPwd}"
                      sh "docker push mitanjali/nodeapp:${DOCKER_TAG}"
                 }
             }
         }
         stage('Docker Deploy Devserver') {
             steps{
-                echo "Deploying to dev server"
-                
+                echo "Deploying to dev server"   
             }
         }
     }
